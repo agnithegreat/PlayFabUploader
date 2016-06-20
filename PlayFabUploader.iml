@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="PlayFabUploader">
+    <configurations>
+      <configuration name="PlayFabUploader" target-platform="Desktop" pure-as="true" output-type="Library" output-file="PlayFabUploader.swc" output-folder="$MODULE_DIR$/../build">
+        <dependencies>
+          <entries>
+            <entry library-name="blooddy_crypto" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="PlayFabSDK" build-configuration-name="PlayFabSDK">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="TaskManagement" build-configuration-name="TaskManagement">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="AIRSDK_21" />
+        </dependencies>
+        <compiler-options />
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="AIRSDK_21" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="as3corelib" level="application" />
+    <orderEntry type="library" exported="" name="blooddy_crypto" level="project" />
+    <orderEntry type="module" module-name="PlayFabSDK" exported="" />
+    <orderEntry type="module" module-name="TaskManagement" exported="" />
+  </component>
+</module>
