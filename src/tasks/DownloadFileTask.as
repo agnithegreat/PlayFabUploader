@@ -37,6 +37,8 @@ package tasks
             _binary = binary;
 
             super();
+
+            // TODO: update for a new SimpleTask notation
         }
 
         override public function execute():void

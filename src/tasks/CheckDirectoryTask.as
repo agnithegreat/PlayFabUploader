@@ -20,6 +20,8 @@ package tasks
             _manifest = manifest;
 
             super();
+
+            // TODO: update for a new SimpleTask notation
         }
 
         override public function execute():void
@@ -27,7 +29,7 @@ package tasks
             super.execute();
             
             PlayFabConfig.load();
-            trace(JSON.stringify(PlayFabConfig.config));
+            log(JSON.stringify(PlayFabConfig.config));
             if (PlayFabConfig.created)
             {
                 handleConfigLoaded(null);
@@ -82,7 +84,7 @@ package tasks
 
         private function handleSaveManifestComplete(event: TaskEvent):void
         {
-            trace("DONE");
+            log("DONE");
             complete();
         }
     }

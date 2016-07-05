@@ -58,11 +58,5 @@ package tasks
                 file.clear();
             }
         }
-
-        override protected function progress(value: Number):void
-        {
-            trace(int(value * 100) + "%");
-            super.progress(value);
-        }
     }
 }

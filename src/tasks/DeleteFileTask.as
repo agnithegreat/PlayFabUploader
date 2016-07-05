@@ -18,6 +18,8 @@ package tasks
             _path = path;
             
             super();
+
+            // TODO: update for a new SimpleTask notation
         }
 
         override public function execute():void

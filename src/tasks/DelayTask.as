@@ -29,11 +29,11 @@ package tasks
             progress(1);
         }
         
-        override protected function complete():void
+        override protected function dispose():void
         {
             clearTimeout(_id);
             
-            super.complete();
+            super.dispose();
         }
     }
 }
