@@ -20,8 +20,6 @@ package tasks
             _manifest = manifest;
 
             super();
-
-            // TODO: update for a new SimpleTask notation
         }
 
         override public function execute():void
@@ -44,15 +42,25 @@ package tasks
         {
             if (event != null)
             {
-                PlayFabConfig.config = JSON.parse(event.data as String);
+                PlayFabConfig.config = event.data != null ? JSON.parse(event.data as String) : {};
                 PlayFabConfig.save();
             }
 
             var task: UploadDirectoryTask = new UploadDirectoryTask(_directory, _manifest);
+            task.addEventListener(TaskEvent.TASK_COMPLETE, handleUploadFileComplete);
             task.addEventListener(TaskEvent.COMPLETE, handleUploadDirectoryComplete);
             task.execute();
         }
 
+        private function handleUploadFileComplete(event: TaskEvent):void
+        {
+            var saveFile: File = File.applicationDirectory.resolvePath("config/manifest.json");
+            saveFile = new File(saveFile.nativePath);
+
+            var task: SaveFileTask = new SaveFileTask(JSON.stringify(_manifest), saveFile);
+            task.execute();
+        }
+        
         private function handleUploadDirectoryComplete(event: TaskEvent):void
         {
             var task: CleanUpManifestTask = new CleanUpManifestTask(_directory, _manifest);

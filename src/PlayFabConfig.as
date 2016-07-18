@@ -20,12 +20,12 @@ package
         public static function set config(data: Object):void
         {
             trace("set config");
-            _config = data;
+            _config = data || {};
         }
 
         public static function get created():Boolean
         {
-            return _config["created"];
+            return _config != null && _config["created"];
         }
 
         public static function load():void

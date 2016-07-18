@@ -57,6 +57,7 @@ package tasks
                 PlayFabConfig.save();
                 file.clear();
             }
+            super.taskComplete(task);
         }
     }
 }

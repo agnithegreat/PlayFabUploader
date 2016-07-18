@@ -11,6 +11,7 @@ package
     import flash.filesystem.File;
 
     import tasks.CheckDirectoryTask;
+    import tasks.CleanUpPlayFabTask;
     import tasks.LoadFileTask;
 
     public class PFUploader extends Sprite
@@ -33,6 +34,11 @@ package
             task.removeEventListener(TaskEvent.COMPLETE, handleLoadConfig);
             task.destroy();
 
+            PlayFabSettings.TitleId = _config["appID"];
+            PlayFabSettings.DeveloperSecretKey = _config["secret"];
+
+            _directory = File.applicationDirectory.resolvePath(_config["assets"]);
+
             task = new LoadFileTask(File.applicationDirectory.resolvePath("config/manifest.json"), false);
             task.addEventListener(TaskEvent.COMPLETE, handleLoadManifest);
             task.execute();
@@ -50,13 +56,12 @@ package
 
         private function init():void
         {
-            PlayFabSettings.TitleId = _config["appID"];
-            PlayFabSettings.DeveloperSecretKey = _config["secret"];
-
-            _directory = File.applicationDirectory.resolvePath(_config["assets"]);
-
             var task: CheckDirectoryTask = new CheckDirectoryTask(_directory, _manifest);
             task.execute();
+
+            // WARNING: IT DELETES ALL CONTENTS FROM PLAYFAB CDN
+//            var task: CleanUpPlayFabTask = new CleanUpPlayFabTask();
+//            task.execute();
         }
     }
 }

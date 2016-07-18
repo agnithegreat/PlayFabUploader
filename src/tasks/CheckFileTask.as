@@ -15,8 +15,6 @@ package tasks
             _file = file;
             
             super();
-
-            // TODO: update for a new SimpleTask notation
         }
 
         override public function execute():void
