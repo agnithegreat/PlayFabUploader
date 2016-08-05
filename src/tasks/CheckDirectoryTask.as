@@ -5,6 +5,7 @@ package tasks
 {
     import com.agnither.tasks.abstract.SimpleTask;
     import com.agnither.tasks.events.TaskEvent;
+    import com.agnither.tasks.global.TaskSystem;
 
     import flash.filesystem.File;
     import flash.utils.ByteArray;
@@ -34,7 +35,7 @@ package tasks
             } else {
                 var task: DownloadFileTask = new DownloadFileTask("config.json");
                 task.addEventListener(TaskEvent.COMPLETE, handleConfigLoaded);
-                task.execute();
+                TaskSystem.getInstance().addTask(task);
             }
         }
 
@@ -49,7 +50,7 @@ package tasks
             var task: UploadDirectoryTask = new UploadDirectoryTask(_directory, _manifest);
             task.addEventListener(TaskEvent.TASK_COMPLETE, handleUploadFileComplete);
             task.addEventListener(TaskEvent.COMPLETE, handleUploadDirectoryComplete);
-            task.execute();
+            TaskSystem.getInstance().addTask(task);
         }
 
         private function handleUploadFileComplete(event: TaskEvent):void
@@ -58,14 +59,14 @@ package tasks
             saveFile = new File(saveFile.nativePath);
 
             var task: SaveFileTask = new SaveFileTask(JSON.stringify(_manifest), saveFile);
-            task.execute();
+            TaskSystem.getInstance().addTask(task);
         }
         
         private function handleUploadDirectoryComplete(event: TaskEvent):void
         {
             var task: CleanUpManifestTask = new CleanUpManifestTask(_directory, _manifest);
             task.addEventListener(TaskEvent.COMPLETE, handleCleanUpManifestComplete);
-            task.execute();
+            TaskSystem.getInstance().addTask(task);
         }
                                
         private function handleCleanUpManifestComplete(event: TaskEvent):void
@@ -77,7 +78,7 @@ package tasks
 
             var task: UploadFileTask = new UploadFileTask(fileData);
             task.addEventListener(TaskEvent.COMPLETE, handleUploadConfigComplete);
-            task.execute();
+            TaskSystem.getInstance().addTask(task);
         }
 
         private function handleUploadConfigComplete(event: TaskEvent):void
@@ -87,7 +88,7 @@ package tasks
             
             var task: SaveFileTask = new SaveFileTask(JSON.stringify(_manifest), saveFile);
             task.addEventListener(TaskEvent.COMPLETE, handleSaveManifestComplete);
-            task.execute();
+            TaskSystem.getInstance().addTask(task);
         }
 
         private function handleSaveManifestComplete(event: TaskEvent):void

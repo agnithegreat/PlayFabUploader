@@ -5,6 +5,7 @@ package tasks
 {
     import com.agnither.tasks.abstract.SimpleTask;
     import com.agnither.tasks.events.TaskEvent;
+    import com.agnither.tasks.global.TaskSystem;
     import com.playfab.PlayFabError;
     import com.playfab.PlayFabServerAPI;
     import com.playfab.ServerModels.GetContentDownloadUrlRequest;
@@ -83,7 +84,7 @@ package tasks
             
             var task: SaveFileTask = new SaveFileTask(_result, _saveTo, _binary);
             task.addEventListener(TaskEvent.COMPLETE, handleSaveComplete);
-            task.execute();
+            TaskSystem.getInstance().addTask(task);
         }
 
         private function handleSaveComplete(event: TaskEvent):void

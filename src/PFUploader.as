@@ -5,6 +5,7 @@ package
 {
     import com.agnither.tasks.abstract.SimpleTask;
     import com.agnither.tasks.events.TaskEvent;
+    import com.agnither.tasks.global.TaskSystem;
     import com.playfab.PlayFabSettings;
 
     import flash.display.Sprite;
@@ -24,7 +25,7 @@ package
         {
             var task: LoadFileTask = new LoadFileTask(File.applicationDirectory.resolvePath("PlayFab_config.json"), false);
             task.addEventListener(TaskEvent.COMPLETE, handleLoadConfig);
-            task.execute();
+            TaskSystem.getInstance().addTask(task);
         }
 
         private function handleLoadConfig(event: TaskEvent):void
@@ -41,7 +42,7 @@ package
 
             task = new LoadFileTask(File.applicationDirectory.resolvePath("config/manifest.json"), false);
             task.addEventListener(TaskEvent.COMPLETE, handleLoadManifest);
-            task.execute();
+            TaskSystem.getInstance().addTask(task);
         }
 
         private function handleLoadManifest(event: TaskEvent):void
@@ -57,7 +58,7 @@ package
         private function init():void
         {
             var task: CheckDirectoryTask = new CheckDirectoryTask(_directory, _manifest);
-            task.execute();
+            TaskSystem.getInstance().addTask(task);
 
             // WARNING: IT DELETES ALL CONTENTS FROM PLAYFAB CDN
 //            var task: CleanUpPlayFabTask = new CleanUpPlayFabTask();

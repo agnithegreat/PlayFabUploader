@@ -5,6 +5,7 @@ package tasks
 {
     import com.agnither.tasks.abstract.SimpleTask;
     import com.agnither.tasks.events.TaskEvent;
+    import com.agnither.tasks.global.TaskSystem;
 
     public class CheckFileTask extends SimpleTask
     {
@@ -26,7 +27,7 @@ package tasks
                 _file.version++;
                 var task: UploadFileTask = new UploadFileTask(_file);
                 task.addEventListener(TaskEvent.COMPLETE, handleUploadComplete);
-                task.execute();
+                TaskSystem.getInstance().addTask(task);
             } else {
                 handleUploadComplete(null);
             }
