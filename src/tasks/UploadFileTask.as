@@ -25,9 +25,9 @@ package tasks
             super();
         }
 
-        override public function execute():void
+        override public function execute(token: Object):void
         {
-            super.execute();
+            super.execute(token);
 
             PlayFabAdminAPI.GetContentUploadUrl(new GetContentUploadUrlRequest({
                 "Key": _file.pathWithVersion,

@@ -38,13 +38,11 @@ package tasks
             _binary = binary;
 
             super();
-
-            // TODO: update for a new SimpleTask notation
         }
 
-        override public function execute():void
+        override public function execute(token: Object):void
         {
-            super.execute();
+            super.execute(token);
 
             PlayFabServerAPI.GetContentDownloadUrl(new GetContentDownloadUrlRequest({
                 "Key": _filename,
@@ -70,7 +68,7 @@ package tasks
         {
             trace("error: " + error.errorMessage);
             trace("trying again");
-            execute();
+            retry();
         }
 
         private function handleDownloadComplete(event: Event):void

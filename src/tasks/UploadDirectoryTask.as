@@ -21,11 +21,11 @@ package tasks
             super();
         }
         
-        override public function execute():void
+        override public function execute(token: Object):void
         {
             uploadRecursively(_directory);
             
-            super.execute();
+            super.execute(token);
         }
 
         private function uploadRecursively(file: File):void

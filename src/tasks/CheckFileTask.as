@@ -18,7 +18,7 @@ package tasks
             super();
         }
 
-        override public function execute():void
+        override public function execute(token: Object):void
         {
             _file.load();
 
@@ -32,7 +32,7 @@ package tasks
                 handleUploadComplete(null);
             }
 
-            super.execute();
+            super.execute(token);
         }
 
         private function handleUploadComplete(event: TaskEvent):void

@@ -23,11 +23,11 @@ package tasks
             // TODO: update for a new SimpleTask notation
         }
 
-        override public function execute():void
+        override public function execute(token: Object):void
         {
             cleanUpRecursively(PlayFabConfig.config);
             
-            super.execute();
+            super.execute(token);
         }
 
         private function cleanUpRecursively(node: Object, path: String = ""):void

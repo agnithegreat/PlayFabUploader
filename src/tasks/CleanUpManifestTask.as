@@ -20,9 +20,9 @@ package tasks
             super();
         }
 
-        override public function execute():void
+        override public function execute(token: Object):void
         {
-            super.execute();
+            super.execute(token);
 
             for (var key: String in _manifest)
             {

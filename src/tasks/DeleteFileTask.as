@@ -22,9 +22,9 @@ package tasks
             // TODO: update for a new SimpleTask notation
         }
 
-        override public function execute():void
+        override public function execute(token: Object):void
         {
-            super.execute();
+            super.execute(token);
 
             PlayFabAdminAPI.DeleteContent(new DeleteContentRequest({
                 "Key": _path
